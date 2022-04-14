@@ -2,6 +2,12 @@
 
 Widgets que aplicam mascaras nos forms do django.
 
+## Instalação
+
+```sh
+python -m pip install coral-decimal-mask
+```
+
 ## Como usar
 
 ```py
