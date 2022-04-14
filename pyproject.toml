@@ -1,9 +1,23 @@
 [tool.poetry]
 name = "decimal_mask"
 version = "0.1.0"
-description = ""
+description = "Django mask decimal fields"
 authors = ["Coral Sistemas"]
 license = "MIT"
+readme = "README.md"
+classifiers = [
+    'Environment :: Web Environment',
+    'Framework :: Django',
+    'Intended Audience :: Developers',
+    'License :: OSI Approved :: MIT License',
+    'Operating System :: OS Independent',
+    'Programming Language :: Python',
+    'Programming Language :: Python :: 3',
+    'Topic :: Internet :: WWW/HTTP :: Dynamic Content',
+]
+packages = [
+    {include = "decimal_mask"}
+]
 
 [tool.poetry.dependencies]
 python = "^3.10"
