@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "decimal_mask"
-version = "0.1.0"
+version = "0.2.0"
 description = "Django mask decimal fields"
 authors = ["Coral Sistemas"]
 license = "MIT"
