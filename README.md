@@ -10,6 +10,17 @@ python -m pip install coral-decimal-mask
 
 ## Como usar
 
+#### Adicione `decimal_mask` em `INSTALLED_APPS`:
+
+```py
+INSTALLED_APPS = [
+    ...
+    "decimal_mask",
+]
+```
+
+#### Configure seus widgets: 
+
 ```py
 from django import forms
 from decimal_mask.widgets import DecimalMaskWidget, MoneyMaskWidget, PercentMaskWidget
