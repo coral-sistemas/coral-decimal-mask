@@ -1,6 +1,7 @@
 import json
 
 from django import forms
+from django.conf import settings
 from django.core.serializers.json import DjangoJSONEncoder
 
 _json_script_escapes = {
@@ -8,6 +9,11 @@ _json_script_escapes = {
     ord("<"): "\\u003C",
     ord("&"): "\\u0026",
 }
+
+
+DECIMAL_MASK_INITJS = getattr(
+    settings, "DECIMAL_MASK_INITJS", "decimal_mask/init.js"
+)
 
 
 class DecimalMaskBaseWidget(forms.TextInput):
@@ -38,7 +44,7 @@ class DecimalMaskBaseWidget(forms.TextInput):
         return attrs
 
     class Media:
-        js = ["decimal_mask/DecimalMask.js", "decimal_mask/init.js"]
+        js = ["decimal_mask/DecimalMask.js", DECIMAL_MASK_INITJS]
 
 
 class DecimalMaskWidget(DecimalMaskBaseWidget):
