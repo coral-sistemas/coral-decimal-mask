@@ -43,8 +43,13 @@ class DecimalMaskBaseWidget(forms.TextInput):
         ).translate(_json_script_escapes)
         return attrs
 
-    class Media:
-        js = ["decimal_mask/DecimalMask.js", DECIMAL_MASK_INITJS]
+    @property
+    def media(self):
+        js = ["decimal_mask/DecimalMask.js"]
+        if DECIMAL_MASK_INITJS:
+            js += [DECIMAL_MASK_INITJS]
+
+        return forms.Media(js=js)
 
 
 class DecimalMaskWidget(DecimalMaskBaseWidget):
