@@ -1,18 +1,18 @@
-'use strict';
+"use strict";
 
 class DecimalMask {
   constructor(input, options) {
     if (input instanceof HTMLInputElement === false) {
-      throw new TypeError('The input should be a HTMLInputElement');
+      throw new TypeError("The input should be a HTMLInputElement");
     }
     this.input = input;
     this.input.mask = this;
 
     this.opts = {
-      keyEvent: 'input',
+      keyEvent: "input",
       backspace: !this.input.required,
       format: {
-        style: 'decimal',
+        style: "decimal",
       },
     };
     this.opts = Object.assign(this.opts, options);
@@ -20,15 +20,21 @@ class DecimalMask {
     this.changeInput();
 
     if (this.input.defaultValue) {
-      this.input.value = this.masking(this.input.value);
+      const fixedValue = Number(this.input.value).toFixed(
+        this.opts.decimalPlaces
+      );
+      this.input.value = this.masking(fixedValue);
     }
 
-    this.input.addEventListener(this.opts.keyEvent, this.handleEvent.bind(this));
-    this.input.addEventListener('click', this.handleEvent.bind(this));
-    this.input.addEventListener('dblclick', this.handleEvent.bind(this));
+    this.input.addEventListener(
+      this.opts.keyEvent,
+      this.handleEvent.bind(this)
+    );
+    this.input.addEventListener("click", this.handleEvent.bind(this));
+    this.input.addEventListener("dblclick", this.handleEvent.bind(this));
 
     if (this.input.form) {
-      this.input.form.addEventListener('submit', evt => {
+      this.input.form.addEventListener("submit", (evt) => {
         if (this.input.value) {
           this.input.value = this.transformToDecimal(this.input.value);
         }
@@ -37,10 +43,9 @@ class DecimalMask {
   }
 
   handleEvent(event) {
-    if (event.type === 'dblclick') {
+    if (event.type === "dblclick") {
       this.onDblclick();
-    }
-    else if (event.type === 'click') {
+    } else if (event.type === "click") {
       this.onClick(event);
     } else {
       this.onMasking(event);
@@ -59,8 +64,12 @@ class DecimalMask {
 
   onMasking(event) {
     const onlyZeros = Number(DecimalMask.unmask(this.input.value)) === 0;
-    if (this.opts.backspace && event?.inputType === 'deleteContentBackward' && onlyZeros) {
-      this.input.value = '';
+    if (
+      this.opts.backspace &&
+      event?.inputType === "deleteContentBackward" &&
+      onlyZeros
+    ) {
+      this.input.value = "";
       return;
     }
 
@@ -70,14 +79,12 @@ class DecimalMask {
   }
 
   changeInput() {
-    this.input.setAttribute('type', 'tel');
+    this.input.setAttribute("type", "tel");
   }
 
-
   transformToDecimal(v) {
-    const fixedValue = Number(v).toFixed(this.opts.decimalPlaces);
-    const n = DecimalMask.unmask(fixedValue);
-    const t = n.padStart(this.opts.decimalPlaces + 1, '0');
+    const n = DecimalMask.unmask(v);
+    const t = n.padStart(this.opts.decimalPlaces + 1, "0");
     const d = t.slice(-this.opts.decimalPlaces);
     const i = t.slice(0, t.length - this.opts.decimalPlaces);
 
@@ -90,14 +97,13 @@ class DecimalMask {
     };
     opts = Object.assign(opts, this.opts.format);
 
-
-    if (typeof value === 'number') {
+    if (typeof value === "number") {
       value = value.toFixed(2);
     }
 
     let decimal = this.transformToDecimal(value);
 
-    if (opts.style === 'percent') {
+    if (opts.style === "percent") {
       decimal = Number(decimal) / 100;
 
       if (decimal > 1) {
@@ -118,11 +124,11 @@ class DecimalMask {
   }
 
   static unmask(v) {
-    return String(v).replace(/\D/g, '').replace(/^0+/g, '');
+    return String(v).replace(/\D/g, "").replace(/^0+/g, "");
   }
 
   static position(v) {
-    const nums = new Set(['1', '2', '3', '4', '5', '6', '7', '8', '9', '0']);
+    const nums = new Set(["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]);
 
     let cc = 0;
     for (let i = v.length - 1; i >= 0; i--) {
