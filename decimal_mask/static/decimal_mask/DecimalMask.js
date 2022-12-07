@@ -75,7 +75,8 @@ class DecimalMask {
 
 
   transformToDecimal(v) {
-    const n = DecimalMask.unmask(v);
+    const fixedValue = Number(v).toFixed(this.opts.decimalPlaces);
+    const n = DecimalMask.unmask(fixedValue);
     const t = n.padStart(this.opts.decimalPlaces + 1, '0');
     const d = t.slice(-this.opts.decimalPlaces);
     const i = t.slice(0, t.length - this.opts.decimalPlaces);
