@@ -1,3 +1,5 @@
+from decimal import Decimal
+
 from django import forms
 from django.shortcuts import render
 
@@ -39,6 +41,12 @@ class TestForm(forms.Form):
     money2 = forms.DecimalField(
         label="Money (widget)",
         widget=MoneyMaskWidget(),
+    )
+    money3 = forms.DecimalField(
+        label="Money (widget)",
+        widget=MoneyMaskWidget(),
+        initial=Decimal("1234.9099992129"),
+        help_text="initial=1234.9099992129",
     )
     percent = forms.DecimalField(
         label="Percent",
