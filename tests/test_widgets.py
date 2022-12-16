@@ -1,4 +1,7 @@
 import json
+from decimal import Decimal
+
+from django import forms
 
 from decimal_mask.widgets import (
     DecimalMaskWidget,
@@ -54,3 +57,25 @@ def test_percent_widget():
     }
     assert "data-decimal-mask" in attrs
     assert json.dumps(expected) == attrs["data-decimal-options"]
+
+
+def test_remove_mask():
+    class TestForm1(forms.Form):
+        value = forms.DecimalField(
+            max_digits=15,
+            widget=DecimalMaskWidget(),
+        )
+
+    class TestForm2(forms.Form):
+        value = forms.DecimalField(
+            max_digits=15,
+            widget=DecimalMaskWidget({"decimalPlaces": 3}),
+        )
+
+    form = TestForm1({"value": "$ 100.99"})
+    assert form.is_valid() is True
+    assert form.cleaned_data["value"] == Decimal("100.99")
+
+    form = TestForm2({"value": "$ 100.999"})
+    assert form.is_valid() is True
+    assert form.cleaned_data["value"] == Decimal("100.999")
