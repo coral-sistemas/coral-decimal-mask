@@ -32,14 +32,6 @@ class DecimalMask {
     );
     this.input.addEventListener("click", this.handleEvent.bind(this));
     this.input.addEventListener("dblclick", this.handleEvent.bind(this));
-
-    if (this.input.form) {
-      this.input.form.addEventListener("submit", (evt) => {
-        if (this.input.value) {
-          this.input.value = this.transformToDecimal(this.input.value);
-        }
-      });
-    }
   }
 
   handleEvent(event) {
