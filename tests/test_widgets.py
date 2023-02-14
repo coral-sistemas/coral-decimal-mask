@@ -64,6 +64,7 @@ def test_remove_mask():
         value = forms.DecimalField(
             max_digits=15,
             widget=DecimalMaskWidget(),
+            required=False,
         )
 
     class TestForm2(forms.Form):
@@ -79,3 +80,7 @@ def test_remove_mask():
     form = TestForm2({"value": "$ 100.999"})
     assert form.is_valid() is True
     assert form.cleaned_data["value"] == Decimal("100.999")
+
+    form = TestForm1({"value": ""})
+    assert form.is_valid() is True
+    assert form.cleaned_data["value"] is None

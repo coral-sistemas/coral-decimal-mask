@@ -52,6 +52,9 @@ class DecimalMaskBaseWidget(forms.TextInput):
         The value is calculated according to the resistant `decimalPlaces`.
         """
         value = data.get(name)
+        if not value:
+            return value
+
         value = re.sub("[^0-9]", "", value)
         dec_places = self.decimal_attrs["decimalPlaces"]
         first = value[:-dec_places]
