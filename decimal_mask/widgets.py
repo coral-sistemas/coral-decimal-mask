@@ -12,11 +12,6 @@ _json_script_escapes = {
 }
 
 
-DECIMAL_MASK_INITJS = getattr(
-    settings, "DECIMAL_MASK_INITJS", "decimal_mask/init.js"
-)
-
-
 class DecimalMaskBaseWidget(forms.TextInput):
     input_type = "tel"
     decimal_attrs = {}
@@ -64,10 +59,11 @@ class DecimalMaskBaseWidget(forms.TextInput):
 
     @property
     def media(self):
-        js = ["decimal_mask/DecimalMask.js"]
-        if DECIMAL_MASK_INITJS:
-            js += [DECIMAL_MASK_INITJS]
-
+        js = getattr(
+            settings,
+            "DECIMAL_MASK_JS",
+            ["decimal_mask/DecimalMask.js", "decimal_mask/init.js"],
+        )
         return forms.Media(js=js)
 
 

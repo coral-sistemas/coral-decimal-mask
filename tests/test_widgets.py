@@ -84,3 +84,22 @@ def test_remove_mask():
     form = TestForm1({"value": ""})
     assert form.is_valid() is True
     assert form.cleaned_data["value"] is None
+
+
+def test_default_media_widget():
+    widget = DecimalMaskWidget()
+    value = widget.media.render()
+    assert "/decimal_mask/DecimalMask.js" in value
+    assert "/decimal_mask/init.js" in value
+
+
+def test_custom_media_widget(settings):
+    settings.DECIMAL_MASK_JS = ["script.js"]
+    widget = DecimalMaskWidget()
+    value = widget.media.render()
+    assert "/script.js" in value
+
+    settings.DECIMAL_MASK_JS = []
+    widget = DecimalMaskWidget()
+    value = widget.media.render()
+    assert value == ""
