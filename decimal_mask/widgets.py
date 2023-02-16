@@ -50,7 +50,7 @@ class DecimalMaskBaseWidget(forms.TextInput):
         if not value:
             return value
 
-        value = re.sub("[^0-9]", "", value)
+        value = re.sub("[^0-9]", "", str(value))
         dec_places = self.decimal_attrs["decimalPlaces"]
         first = value[:-dec_places]
         second = value[-dec_places:]
