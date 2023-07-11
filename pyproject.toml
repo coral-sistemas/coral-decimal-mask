@@ -23,7 +23,7 @@ packages = [
 python = "^3.10"
 
 [tool.poetry.dev-dependencies]
-black = "^23.3.0"
+black = "^23.7.0"
 flake8 = "^6.0.0"
 isort = "^5.10.1"
 pytest = "^7.3.2"
