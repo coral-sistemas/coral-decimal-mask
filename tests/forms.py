@@ -11,16 +11,25 @@ from decimal_mask.widgets import (
 
 class TestForm(forms.Form):
     decimal1 = forms.DecimalField(
-        label="Decimal (en-US)",
+        label="Decimal1 (en-US)",
         widget=DecimalMaskWidget(),
     )
     decimal2 = forms.DecimalField(
-        label="Decimal (pt-BR)",
+        label="Decimal2 (pt-BR)",
         widget=DecimalMaskWidget(
             decimal_attrs={
                 "locales": "pt-BR",
                 "decimalPlaces": 3,
             },
+        ),
+    )
+    result = forms.DecimalField(
+        label="Sum Decimal1 + Decimal2",
+        widget=DecimalMaskWidget(
+            decimal_attrs={
+                "decimalPlaces": 3,
+            },
+            attrs={'readonly': True}
         ),
     )
     money1 = forms.DecimalField(

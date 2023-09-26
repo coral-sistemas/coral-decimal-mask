@@ -90,7 +90,7 @@ class DecimalMask {
     opts = Object.assign(opts, this.opts.format);
 
     if (typeof value === "number") {
-      value = value.toFixed(2);
+      value = value.toFixed(this.opts.decimalPlaces);
     }
 
     let decimal = this.transformToDecimal(value);

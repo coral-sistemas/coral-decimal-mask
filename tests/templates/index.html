@@ -11,5 +11,20 @@
 {{ form.as_p }}
 
 {{ form.media.js }}
+
+<hr>
+
+<script>
+  const result = document.getElementById("id_result");
+  const dec1 = document.getElementById("id_decimal1");
+  const dec2 = document.getElementById("id_decimal2");
+
+  function sum() {
+    result.mask.value = dec1.mask.value + dec2.mask.value;
+  }
+
+  dec1.addEventListener('input', sum)
+  dec2.addEventListener('input', sum)
+</script>
 </body>
 </html>
