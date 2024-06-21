@@ -24,7 +24,7 @@ python = "^3.10"
 
 [tool.poetry.dev-dependencies]
 black = "^24.4.2"
-flake8 = "^6.1.0"
+flake8 = "^7.1.0"
 isort = "^5.13.2"
 pytest = "^8.2.2"
 pytest-django = "^4.7.0"
